@@ -20,4 +20,14 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+        
+        public function beforeAction(CAction $action)
+        {
+            if(!isset(Yii::app()->session['user']) && !($action->controller->id == 'site' && $action->id == 'login'))
+            {
+                $this->redirect(array('site/login'));
+            }
+
+            return true;
+        }        
 }

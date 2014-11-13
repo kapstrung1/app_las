@@ -5,6 +5,8 @@ class SiteController extends Controller
 	/**
 	 * Declares class-based actions.
 	 */
+        
+
 	public function actions()
 	{
 		return array(
@@ -29,6 +31,7 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+                var_dump(Yii::app()->user);
 		$this->render('index');
 	}
 
@@ -92,8 +95,11 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+                        {                           
+                            Yii::app()->getController()->redirect(array('/warstwa/index'));
+                        }    
 		}
+
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
@@ -104,6 +110,8 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
+                unset(Yii::app()->session['user']);
+                        
 		$this->redirect(Yii::app()->homeUrl);
 	}
 }
