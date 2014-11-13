@@ -1,6 +1,9 @@
 <?php
 /**
  * This is the bootstrap file for test application.
+ *
+ *test 3 pierwsze wstawienie
+ *
  * This file should be removed when the application is deployed for production.
  */
 
